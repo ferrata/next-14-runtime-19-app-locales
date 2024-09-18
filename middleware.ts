@@ -1,8 +1,11 @@
+import { INTERNALS } from 'next/dist/server/web/spec-extension/request'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getLocale, locales } from 'localization'
 
 export function middleware(request: NextRequest): NextResponse {
+  // console.log(`${request.method} ${request.nextUrl.toString()}`)
+
   const { pathname } = request.nextUrl
   const pathnameHasLocale = locales.some(
     locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -11,6 +14,8 @@ export function middleware(request: NextRequest): NextResponse {
 
   const locale = getLocale(request)
   request.nextUrl.pathname = `/${locale}${pathname}`
+
+  // console.log(`Redirecting to localized page (${locale}) ${request.nextUrl.toString()}`)
 
   return NextResponse.redirect(request.nextUrl)
 }
