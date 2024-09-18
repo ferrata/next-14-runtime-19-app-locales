@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3111",
+    "dev": "next dev -p 3111 -H localhost",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
